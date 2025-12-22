@@ -4,7 +4,7 @@ import { supabase } from '../../lib/supabase';
 import './Admin.css';
 
 const Admin = () => {
-    const { user, signIn, signUp, signOut } = useAuth();
+    const { user, profile, signIn, signUp, signOut } = useAuth();
     
     // Auth Form State
     const [isLogin, setIsLogin] = useState(true);
@@ -28,17 +28,24 @@ const Admin = () => {
 
     const fetchMessages = async () => {
         try {
-            // Direct query to Supabase (Protected by RLS)
-            const { data, error } = await supabase
-                .from('messages')
-                .select('*')
-                .order('created_at', { ascending: false });
+            // Fetch from our own API (Unified for Local and Prod)
+            // Local: Proxies to server.js (reads json)
+            // Prod: Calls api/messages.js (reads supabase)
+            const response = await fetch('/api/messages', {
+                headers: {
+                    'Authorization': 'Bearer admin123'
+                }
+            });
 
-            if (error) throw error;
+            if (!response.ok) {
+                throw new Error('Error al cargar mensajes');
+            }
+
+            const data = await response.json();
             setMessages(data);
         } catch (err) {
             console.error('Error fetching messages:', err);
-            setDataError('No se pudieron cargar los mensajes. Verifica tus permisos.');
+            setDataError('No se pudieron cargar los mensajes. Verifica que el servidor backend esté corriendo.');
         }
     };
 
@@ -105,6 +112,22 @@ const Admin = () => {
                                 : '¿Ya tienes cuenta? Inicia sesión'}
                         </button>
                     </div>
+                </div>
+            </div>
+        );
+    }
+
+    // Role Check
+    if (profile?.role !== 'admin') {
+        return (
+            <div className="admin-dashboard page">
+                <div className="admin-card">
+                    <h2>⛔ Acceso Restringido</h2>
+                    <p>No tienes permisos de administrador para ver esta página.</p>
+                    <p>Tu rol actual es: <strong>{profile?.role || 'user'}</strong></p>
+                    <button onClick={signOut} className="admin-logout" style={{marginTop: '20px'}}>
+                        Cerrar Sesión
+                    </button>
                 </div>
             </div>
         );
