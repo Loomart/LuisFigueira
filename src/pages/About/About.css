@@ -1,0 +1,69 @@
+.about {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  padding-top: 4rem;
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  align-items: center;
+  max-width: 1000px;
+  flex-wrap: wrap;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-text h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.about-text p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  max-width: 600px;
+}
+
+.about-image {
+  flex: 1;
+  min-width: 250px;
+  background: transparent !important;
+}
+
+.about-image img {
+  background: transparent !important;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: filter 0.3s ease;
+}
+
+/* Invert image colors in dark mode (useful for black logos/line art) */
+[data-theme="dark"] .about-image img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-image {
+    display: flex;
+    justify-content: center;
+  }
+}

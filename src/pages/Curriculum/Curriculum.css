@@ -1,0 +1,62 @@
+/* Curriculum.css limpio y visualmente mejorado */
+
+.curriculum {
+  max-width: 960px;
+  margin: 3rem auto;
+  padding: 6rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.cv-block {
+  width: 100%;
+  background: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  min-width: 280px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.cv-block h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  border-left: 4px solid var(--primary-color);
+  padding-left: 0.6rem;
+  margin: 0;
+}
+
+.cv-block p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--text-color);
+}
+
+.cv-card-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.experience-card,
+.education-card,
+.language-card,
+.skill-card {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-details,
+.card-toggle {
+  font-size: 0.92rem;
+}

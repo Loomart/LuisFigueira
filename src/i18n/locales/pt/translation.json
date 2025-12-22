@@ -1,0 +1,212 @@
+{
+  "about": "Sobre mim",
+  "about_text": "Sou um programador de software com paixão por criar soluções elegantes e eficientes. Especializo-me em aplicações web modernas e procuro sempre novos desafios e tecnologias.",
+  "portfolio": "Portfólio",
+  "cv": {
+    "title": "Currículo",
+    "profileTitle": "Perfil Profissional",
+    "profile": "Sou um programador de software proativo e orientado a resultados, especializado em aplicações web full-stack. Gosto de resolver desafios técnicos complexos e crescer em equipas ágeis e colaborativas.",
+    "experienceTitle": "Experiência Profissional",
+    "items": [
+      {
+        "role": "Desenvolvedor Full Stack",
+        "company": "Empresa de Software XYZ",
+        "period": "2022 - Presente",
+        "description": "Conceção e desenvolvimento de APIs para aplicações de alto desempenho. Envolvido em projetos frontend e backend com foco na escalabilidade.",
+        "technologies": [
+          "Spring",
+          "Java",
+          "Angular",
+          "StencilJS",
+          "Docker",
+          "Kubernetes",
+          "SQL Server"
+        ]
+      },
+      {
+        "role": "Engenheiro de Software",
+        "company": "Mercury-TFS",
+        "period": "2017 - 2022",
+        "description": "Desenvolvimento full-stack para soluções empresariais. Aplicação de TDD, integração contínua e trabalho em equipa Scrum.",
+        "technologies": [
+          "Spring Boot",
+          "Spring Cloud",
+          "IBM MQ",
+          "Java",
+          "Docker",
+          "Jenkins"
+        ]
+      },
+      {
+        "role": "Desenvolvedor de Software",
+        "company": "Triskell Software",
+        "period": "2014 - 2017",
+        "description": "Manutenção e evolução de uma aplicação de gestão de portfólios. Correção de bugs e análise técnica.",
+        "technologies": [
+          "Spring Boot",
+          "Java",
+          "ExtJS",
+          "SQL"
+        ]
+      },
+      {
+        "role": "Desenvolvedor de Software",
+        "company": "Artemis International Solutions Corporation",
+        "period": "2013 - 2014",
+        "description": "Participação no programa Leonardo da Vinci. Apoio no desenvolvimento de funcionalidades e correções."
+      },
+      {
+        "role": "Estágio",
+        "company": "Seimas (Parlamento da Lituânia)",
+        "period": "2010",
+        "description": "Gestão de sistemas de informação e monitorização de redes."
+      },
+      {
+        "role": "Técnico de Informática Nível 3",
+        "company": "FJL Figueira, Unipessoal Lda.",
+        "period": "2004 - 2005",
+        "description": "Apoio ao cliente, reparação de hardware/software e desenvolvimento com Visual Studio (VB e C#)."
+      }
+    ],
+    "educationTitle": "Formação Académica",
+    "education": [
+      {
+        "title": "Mestrado em Desenvolvimento de Aplicações Móveis",
+        "school": "Master D, Madrid",
+        "period": "2018 - 2019",
+        "description": ""
+      },
+      {
+        "title": "Licenciatura em Informática",
+        "school": "Universidade Portucalense Infante D. Henrique, Porto",
+        "period": "2008 - 2013",
+        "description": "Especialização em algoritmos, linguagens de programação, estruturas de dados e IA."
+      },
+      {
+        "title": "Técnico de Informática Nível 3",
+        "school": "Escola Profissional de Chaves",
+        "period": "2000 - 2003",
+        "description": "Projetos de programação e manutenção de computadores (hardware/software)."
+      }
+    ],
+    "languagesTitle": "Idiomas",
+    "languages": [
+      {
+        "language": "Português",
+        "level": "Nativo"
+      },
+      {
+        "language": "Espanhol",
+        "level": "C1"
+      },
+      {
+        "language": "Inglês",
+        "level": "C1"
+      },
+      {
+        "language": "Francês",
+        "level": "B1"
+      }
+    ],
+    "skillsTitle": "Competências Técnicas",
+    "skillsLabels": {
+      "languages": "Linguagens",
+      "frameworks": "Frameworks",
+      "tools": "Ferramentas",
+      "os": "Sistemas Operativos",
+      "other": "Outros"
+    },
+    "skills": {
+      "languages": [
+        "Java",
+        "PHP",
+        "SQL",
+        "MySQL",
+        "VB.NET (básico)",
+        "Pascal",
+        "Lua",
+        "Bash",
+        "Zsh",
+        "Shell",
+        "Batch",
+        "JCL",
+        "JavaScript",
+        "CSS",
+        "JSON",
+        "XML"
+      ],
+      "frameworks": [
+        "ExtJS",
+        "Hibernate",
+        "Spring Boot",
+        "Spring Data",
+        "Spring Integration",
+        "StencilJS"
+      ],
+      "tools": [
+        "Maven",
+        "Tomcat",
+        "Git",
+        "Docker",
+        "UML",
+        "Gradle"
+      ],
+      "os": [
+        "Linux",
+        "Windows",
+        "macOS"
+      ],
+      "other": [
+        "Ágil (Scrum & Kanban)",
+        "REST",
+        "CI/CD com Jenkins",
+        "Microserviços",
+        "Testes unitários",
+        "Integração contínua"
+      ]
+    }
+  },
+  "certifications": {
+    "title": "Certificações",
+    "view": "Ver",
+    "gallery": {
+      "docker4beginners": "Docker para Iniciantes",
+      "gitComplete": "Git Completo",
+      "devOpsCICD": "DevOps CI/CD",
+      "drawCuteCartoons": "Desenhar Personagens Cartoon",
+      "jiraWorkflows": "Fluxos de trabalho no Jira",
+      "jenkinsMaster": "Jenkins Master",
+      "mavenGuru": "Maven Guru",
+      "LinuxBashShellScripting": "Linux Bash Scripting",
+      "ScrumAndKanban": "Scrum e Kanban",
+      "accountManagement": "Gestão de Contas",
+      "theoryBehindProgramming": "Teoria da Programação"
+    }
+  },
+  "contact": {
+    "title": "Contactos",
+    "subtitle": "Tem um projeto em mente ou quer conversar? Fale comigo!",
+    "name": "Nome",
+    "namePlaceholder": "O seu nome",
+    "email": "E-mail",
+    "emailPlaceholder": "oseuemail@exemplo.com",
+    "message": "Mensagem",
+    "messagePlaceholder": "Escreva a sua mensagem aqui...",
+    "send": "Enviar Mensagem",
+    "sentMessage": "Obrigado pelo contacto! Responderei o mais breve possível."
+  },
+  "projects": {
+    "defragg": {
+      "description": "Jogo educativo com foco em cibersegurança, desenvolvido como FPS em Unity. O jogador controla um personagem simbólico (um computador) que elimina ameaças digitais disparando pacotes de antivírus."
+    },
+    "gxupsite": {
+      "description": "Website oficial do grupo universitário de xadrez, criado para divulgar atividades, resultados e eventos. Design responsivo com foco em acessibilidade e clareza."
+    },
+    "gxupvr": {
+      "description": "Projeto em Unity que simula uma sala de xadrez interativa em 3D. Concebido como complemento visual e lúdico ao espaço físico do clube."
+    },
+    "nccsocgest": {
+      "description": "Software de gestão interna criado para um clube de natação, com funcionalidades centradas no registo, controlo e manutenção de sócios. Desenvolvido em Visual Basic."
+    }
+  }
+}

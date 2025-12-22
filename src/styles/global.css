@@ -1,0 +1,82 @@
+:root {
+  /* Light Mode Variables */
+  --bg-color: #ffffff; /* Changed from #f7f7f7 to pure white */
+  --text-color: #333;
+  --header-bg: #ffffff;
+  --card-bg: #ffffff;
+  --border-color: #e5e5e5; /* Slightly lighter border */
+  --primary-color: #007acc;
+  --secondary-color: #555; /* For icons mostly */
+  --bg-alt: #f9f9f9; /* Very light gray for alternate sections */
+  --shadow-color: rgba(0, 0, 0, 0.08); /* Slightly stronger shadow for visibility on white */
+  --header-shadow: rgba(0, 0, 0, 0.05);
+  
+  /* Badges */
+  --badge-bg: #f0f7ff;
+  --badge-text: #004488;
+}
+
+[data-theme="dark"] {
+  /* Dark Mode Variables */
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --header-bg: #1e1e1e;
+  --card-bg: #1e1e1e;
+  --border-color: #333;
+  --primary-color: #4da3ff; /* Lighter blue for dark mode */
+  --secondary-color: #aaa;
+  --bg-alt: #181818;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --header-shadow: rgba(0, 0, 0, 0.5);
+
+  /* Badges */
+  --badge-bg: #1a3c5e;
+  --badge-text: #d1e4ff;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Remove gray tap highlight on iOS */
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-color); /* Fix for iOS overscroll color */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased; /* Better font rendering on macOS/iOS */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+section {
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page {
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

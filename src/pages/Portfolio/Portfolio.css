@@ -1,0 +1,19 @@
+.portfolio {
+  padding: 2rem;
+  padding-top: 6rem; /* Más espacio arriba por el header fijo */
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+}
+
+.portfolio-grid {
+  display: grid;
+  gap: 2.5rem; /* Más espacio entre tarjetas */
+  max-width: 1200px;
+  width: 100%;
+  /* Grid responsivo mejorado */
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  align-items: start; /* IMPORTANTE: Alinea al inicio para que no se estiren */
+  padding-bottom: 3rem;
+}

@@ -1,0 +1,99 @@
+/* card-theme.css */
+
+.card-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.card-toggle strong {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    color: var(--secondary-color);
+}
+
+.toggle-icon.rotated {
+    transform: rotate(180deg);
+}
+
+.card-details {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.card-details.open {
+    max-height: 1000px;
+    opacity: 1;
+    border-top: 1px solid var(--border-color);
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+}
+
+/* Estilo común para tarjetas */
+.experience-card,
+.education-card,
+.language-card,
+.skill-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    border-left: 4px solid transparent;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.experience-card.open {
+    border-left-color: var(--primary-color);
+}
+
+.education-card.open {
+    border-left-color: #27ae60;
+}
+
+.language-card.open {
+    border-left-color: #e67e22;
+}
+
+.skill-card.open {
+    border-left-color: #9b59b6;
+}
+
+/* Fondo suave alternativo */
+.cv-block:nth-of-type(even) {
+    background-color: var(--bg-alt);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+/* Tech badges */
+.tech-badge {
+    background-color: var(--badge-bg);
+    color: var(--badge-text);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    display: inline-block;
+    margin: 0.2rem 0.2rem 0 0;
+}
+
+/* Títulos de sección */
+.cv-block h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    border-left: 4px solid var(--primary-color);
+    padding-left: 0.5rem;
+    margin-bottom: 1rem;
+}

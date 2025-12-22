@@ -1,0 +1,212 @@
+{
+  "about": "About Me",
+  "about_text": "I am a software developer with a passion for building elegant and efficient solutions. I specialize in modern web applications and I'm always looking for new challenges and technologies.",
+  "portfolio": "Portfolio",
+  "cv": {
+    "title": "Resume",
+    "profileTitle": "Professional Profile",
+    "profile": "I am a proactive and results-driven software developer, specialised in full-stack web applications. I enjoy solving complex technical challenges and growing within agile, collaborative teams.",
+    "experienceTitle": "Professional Experience",
+    "items": [
+      {
+        "role": "Full Stack Developer",
+        "company": "Software Company XYZ",
+        "period": "2022 - Present",
+        "description": "Designed and developed APIs for high-performance applications. Involved in both frontend and backend projects, focusing on scalability.",
+        "technologies": [
+          "Spring",
+          "Java",
+          "Angular",
+          "StencilJS",
+          "Docker",
+          "Kubernetes",
+          "SQL Server"
+        ]
+      },
+      {
+        "role": "Software Engineer",
+        "company": "Mercury-TFS",
+        "period": "2017 - 2022",
+        "description": "Full-stack development for enterprise-grade solutions. Applied TDD, continuous integration, and Scrum teamwork.",
+        "technologies": [
+          "Spring Boot",
+          "Spring Cloud",
+          "IBM MQ",
+          "Java",
+          "Docker",
+          "Jenkins"
+        ]
+      },
+      {
+        "role": "Software Developer",
+        "company": "Triskell Software",
+        "period": "2014 - 2017",
+        "description": "Maintained and evolved a project portfolio management application. Bug fixing and technical analysis.",
+        "technologies": [
+          "Spring Boot",
+          "Java",
+          "ExtJS",
+          "SQL"
+        ]
+      },
+      {
+        "role": "Software Developer",
+        "company": "Artemis International Solutions Corporation",
+        "period": "2013 - 2014",
+        "description": "Participated in the Leonardo da Vinci programme. Supported feature development and bug resolution."
+      },
+      {
+        "role": "Intern",
+        "company": "Seimas (Parliament of Lithuania)",
+        "period": "2010",
+        "description": "Managed information systems and monitored networks."
+      },
+      {
+        "role": "IT Technician Level 3",
+        "company": "FJL Figueira, Unipessoal Lda.",
+        "period": "2004 - 2005",
+        "description": "Customer support, hardware/software repair and Visual Studio development (VB and C#)."
+      }
+    ],
+    "educationTitle": "Education",
+    "education": [
+      {
+        "title": "Master in Mobile App Development",
+        "school": "Master D, Madrid",
+        "period": "2018 - 2019",
+        "description": ""
+      },
+      {
+        "title": "Degree in Computer Science",
+        "school": "Universidade Portucalense Infante D. Henrique, Porto",
+        "period": "2008 - 2013",
+        "description": "Specialised in algorithms, programming languages, data structures, and AI."
+      },
+      {
+        "title": "IT Technician Level 3",
+        "school": "Escola Profissional de Chaves",
+        "period": "2000 - 2003",
+        "description": "Worked on programming projects and computer maintenance (hardware/software)."
+      }
+    ],
+    "languagesTitle": "Languages",
+    "languages": [
+      {
+        "language": "Portuguese",
+        "level": "Native"
+      },
+      {
+        "language": "Spanish",
+        "level": "C1"
+      },
+      {
+        "language": "English",
+        "level": "C1"
+      },
+      {
+        "language": "French",
+        "level": "B1"
+      }
+    ],
+    "skillsTitle": "Technical Skills",
+    "skillsLabels": {
+      "languages": "Languages",
+      "frameworks": "Frameworks",
+      "tools": "Tools",
+      "os": "Operating Systems",
+      "other": "Other"
+    },
+    "skills": {
+      "languages": [
+        "Java",
+        "PHP",
+        "SQL",
+        "MySQL",
+        "VB.NET (basic)",
+        "Pascal",
+        "Lua",
+        "Bash",
+        "Zsh",
+        "Shell",
+        "Batch",
+        "JCL",
+        "JavaScript",
+        "CSS",
+        "JSON",
+        "XML"
+      ],
+      "frameworks": [
+        "ExtJS",
+        "Hibernate",
+        "Spring Boot",
+        "Spring Data",
+        "Spring Integration",
+        "StencilJS"
+      ],
+      "tools": [
+        "Maven",
+        "Tomcat",
+        "Git",
+        "Docker",
+        "UML",
+        "Gradle"
+      ],
+      "os": [
+        "Linux",
+        "Windows",
+        "macOS"
+      ],
+      "other": [
+        "Agile (Scrum & Kanban)",
+        "REST",
+        "CI/CD with Jenkins",
+        "Microservices",
+        "Unit testing",
+        "Continuous integration"
+      ]
+    }
+  },
+  "certifications": {
+    "title": "Certifications",
+    "view": "View",
+    "gallery": {
+      "docker4beginners": "Docker for Beginners",
+      "gitComplete": "Git Complete",
+      "devOpsCICD": "DevOps CI/CD",
+      "drawCuteCartoons": "Draw Cute Cartoons",
+      "jiraWorkflows": "Jira Workflows",
+      "jenkinsMaster": "Jenkins Master",
+      "mavenGuru": "Maven Guru",
+      "LinuxBashShellScripting": "Linux Bash Scripting",
+      "ScrumAndKanban": "Scrum and Kanban",
+      "accountManagement": "Account Management",
+      "theoryBehindProgramming": "Theory Behind Programming"
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Have a project in mind or want to chat? Contact me!",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "youremail@example.com",
+    "message": "Message",
+    "messagePlaceholder": "Write your message here...",
+    "send": "Send Message",
+    "sentMessage": "Thanks for contacting! I will reply as soon as possible."
+  },
+  "projects": {
+    "defragg": {
+      "description": "Educational video game focused on cybersecurity, designed as a first-person shooter in Unity. The player controls a symbolic character (a computer) who eliminates digital threats by shooting antivirus packets."
+    },
+    "gxupsite": {
+      "description": "Official website of the university chess group, created to share activities, results, and events. Responsive design focused on accessibility and clarity."
+    },
+    "gxupvr": {
+      "description": "Unity project simulating an interactive 3D chess room. Designed as a visual and playful complement to the physical club environment."
+    },
+    "nccsocgest": {
+      "description": "Internal management software created for a swimming club, with features focused on member registration, tracking and control. Developed in Visual Basic."
+    }
+  }
+}
