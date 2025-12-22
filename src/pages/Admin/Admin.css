@@ -19,7 +19,7 @@
 .admin-input {
     width: 100%;
     padding: 0.8rem;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     border: 1px solid var(--border-color);
     border-radius: 6px;
     background: var(--bg-alt);
@@ -35,6 +35,7 @@
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
+    margin-top: 1rem;
 }
 
 .admin-error {
@@ -43,6 +44,28 @@
     font-size: 0.9rem;
 }
 
+.auth-toggle {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+.user-email {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-top: 0.2rem;
+}
+
+/* Dashboard Styles reused from before */
 .admin-dashboard {
     max-width: 800px;
     margin: 0 auto;
