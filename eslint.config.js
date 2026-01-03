@@ -30,4 +30,15 @@ export default [
       ],
     },
   },
+  {
+    files: ['api/**/*.js', 'server.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      globals: { ...globals.node },
+      sourceType: 'module',
+    },
+    rules: {
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+    },
+  },
 ]

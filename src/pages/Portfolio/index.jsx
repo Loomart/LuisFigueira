@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import ProjectCard from '../../components/ProjectCard';
 import { projects } from '../../data/projects';
 import './Portfolio.css';
@@ -10,7 +9,6 @@ import './Portfolio.css';
  * Manages the state of which card is currently expanded (only one at a time).
  */
 const Portfolio = () => {
-  const { t } = useTranslation();
   
   // State to track which project card is expanded.
   // Stores the index of the open card, or null if none are open.

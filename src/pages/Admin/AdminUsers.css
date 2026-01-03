@@ -1,0 +1,37 @@
+
+/* Users Table */
+.users-table-container {
+    overflow-x: auto;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.users-table th,
+.users-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.users-table th {
+    background: var(--bg-alt);
+    font-weight: 600;
+}
+
+.role-select {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: var(--bg-main);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+}
+
+.role-select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

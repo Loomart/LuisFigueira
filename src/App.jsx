@@ -24,7 +24,7 @@ function App() {
           <Route path="/cv" element={<Curriculum />} />
           <Route path="/certificaciones" element={<Certifications />} />
           <Route path="/contacto" element={<Contact />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/panel-privado-8743" element={<Admin />} />
         </Routes>
       </main>
     </Router>

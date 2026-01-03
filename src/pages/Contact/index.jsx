@@ -41,8 +41,8 @@ const Contact = () => {
                         <div className="contact-item">
                             <span className="icon">💼</span>
                             <div className="social-links">
-                                <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                                <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a href="https://www.linkedin.com/in/lfigueira/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                                <a href="https://github.com/Loomart" target="_blank" rel="noopener noreferrer">GitHub</a>
                             </div>
                         </div>
                     </div>

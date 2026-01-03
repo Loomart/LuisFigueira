@@ -4,7 +4,6 @@
  */
 
 export const API_ENDPOINTS = {
-  CONTACT: '/api/contact',
 };
 
 export const STORAGE_KEYS = {

@@ -123,8 +123,84 @@
     font-size: 0.9rem;
 }
 
-.message-body {
-    margin-top: 1rem;
-    white-space: pre-wrap;
-    line-height: 1.5;
+/* ... previous styles ... */
+
+.role-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+.role-badge.admin { background-color: #e74c3c; }
+.role-badge.support { background-color: #f39c12; }
+.role-badge.editor { background-color: #3498db; }
+.role-badge.user { background-color: #7f8c8d; }
+
+.role-simulator {
+    background: var(--bg-alt);
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--primary-color);
+}
+
+.simulator-select {
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.dashboard-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.message-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 10px;
+}
+
+.action-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.action-btn.reply { background: #3498db; color: white; }
+.action-btn.delete { background: #e74c3c; color: white; }
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stat-card {
+    background: var(--bg-main);
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 10px 0;
 }

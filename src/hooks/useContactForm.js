@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { API_ENDPOINTS, NOTIFICATION_TYPES } from '../config/constants';
+import { NOTIFICATION_TYPES } from '../config/constants';
+import { supabase } from '../lib/supabase';
 
 /**
  * Custom hook for managing the contact form logic.
@@ -36,15 +37,11 @@ const useContactForm = () => {
         setIsSubmitting(true);
         
         try {
-            const response = await fetch(API_ENDPOINTS.CONTACT, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+            const { error } = await supabase
+                .from('messages')
+                .insert([{ name: formData.name, email: formData.email, message: formData.message }]);
 
-            if (response.ok) {
+            if (!error) {
                 setNotification({ message: t('contact.sentMessage'), type: NOTIFICATION_TYPES.SUCCESS });
                 setFormData({ name: '', email: '', message: '' });
             } else {

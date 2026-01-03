@@ -11,6 +11,18 @@ if (supabaseUrl && supabaseAnonKey) {
   console.warn('⚠️ Supabase credentials not found in environment variables. Auth and DB features will be disabled.');
   
   // Mock Supabase client to prevent crash
+  const mockQueryBuilder = () => {
+    const builder = {
+      select: () => builder,
+      insert: () => Promise.reject(new Error("Base de datos no conectada.")),
+      update: () => builder,
+      eq: () => builder,
+      single: () => Promise.resolve({ data: null, error: { message: "Base de datos no conectada" } }),
+      order: () => Promise.resolve({ data: [], error: { message: "Base de datos no conectada" } }),
+    };
+    return builder;
+  };
+
   supabaseInstance = {
     auth: {
       getSession: () => Promise.resolve({ data: { session: null } }),
@@ -19,12 +31,7 @@ if (supabaseUrl && supabaseAnonKey) {
       signInWithPassword: () => Promise.reject(new Error("Supabase no está configurado localmente.")),
       signOut: () => Promise.resolve(),
     },
-    from: () => ({
-      select: () => ({
-        order: () => Promise.reject(new Error("Base de datos no conectada."))
-      }),
-      insert: () => Promise.reject(new Error("Base de datos no conectada."))
-    })
+    from: () => mockQueryBuilder()
   };
 }
 
