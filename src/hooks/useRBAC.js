@@ -1,4 +1,5 @@
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
+import { useCallback, useMemo } from 'react';
 import { ROLES } from '../config/rbac';
 
 /**
@@ -9,29 +10,29 @@ export const useRBAC = () => {
     const { profile } = useAuth();
 
     // Default to USER role if no profile found
-    const currentRole = profile?.role || ROLES.USER;
+    const currentRole = useMemo(() => profile?.role || ROLES.USER, [profile]);
     
     // permissions are now coming directly from the DB profile object
-    const permissions = profile?.permissions || [];
+    const permissions = useMemo(() => profile?.permissions || [], [profile]);
 
     /**
      * Check if user has a specific permission
      * @param {string} permission 
      */
-    const can = (permission) => {
+    const can = useCallback((permission) => {
         if (currentRole === ROLES.ADMIN) return true;
         return permissions.includes(permission);
-    };
+    }, [currentRole, permissions]);
 
-    const hasAll = (permissionsList) => {
+    const hasAll = useCallback((permissionsList) => {
         if (currentRole === ROLES.ADMIN) return true;
         return permissionsList.every(p => permissions.includes(p));
-    };
+    }, [currentRole, permissions]);
 
-    const hasAny = (permissionsList) => {
+    const hasAny = useCallback((permissionsList) => {
         if (currentRole === ROLES.ADMIN) return true;
         return permissionsList.some(p => permissions.includes(p));
-    };
+    }, [currentRole, permissions]);
 
     return {
         role: currentRole,

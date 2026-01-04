@@ -16,6 +16,10 @@ export const THEMES = {
   DARK: 'dark',
 };
 
+export const COOKIE_KEYS = {
+  THEME: 'theme',
+};
+
 export const NOTIFICATION_TYPES = {
   SUCCESS: 'success',
   ERROR: 'error',

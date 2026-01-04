@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { STORAGE_KEYS, THEMES } from '../config/constants';
+import { STORAGE_KEYS, COOKIE_KEYS, THEMES } from '../config/constants';
 
 /**
  * Custom hook for theme management.
@@ -13,11 +13,10 @@ const useTheme = () => {
   const [theme, setTheme] = useState(THEMES.LIGHT);
 
   useEffect(() => {
-    // Check local storage or system preference
+    const cookieMatch = document.cookie.match(new RegExp('(^| )' + COOKIE_KEYS.THEME + '=([^;]+)'));
+    const cookieTheme = cookieMatch ? cookieMatch[2] : null;
     const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME);
-    const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? THEMES.DARK : THEMES.LIGHT;
-    const initialTheme = savedTheme || systemPreference;
-    
+    const initialTheme = cookieTheme || savedTheme || THEMES.LIGHT;
     setTheme(initialTheme);
     document.documentElement.setAttribute('data-theme', initialTheme);
   }, []);
@@ -26,6 +25,7 @@ const useTheme = () => {
     const newTheme = theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
     setTheme(newTheme);
     localStorage.setItem(STORAGE_KEYS.THEME, newTheme);
+    document.cookie = `${COOKIE_KEYS.THEME}=${newTheme}; path=/; max-age=31536000`;
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 

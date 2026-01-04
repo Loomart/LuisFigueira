@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useAuth } from '../../context/useAuth';
 import { useRBAC } from '../../hooks/useRBAC';
 import { supabase } from '../../lib/supabase';
@@ -41,14 +41,32 @@ const Admin = () => {
         return can(permission);
     }, [simulatedRole, can]);
 
+    const canViewMessages = useMemo(() => {
+        if (simulatedRole) {
+            const simPerms = ROLE_DEFINITIONS[simulatedRole] || [];
+            if (simulatedRole === 'admin') return true;
+            return simPerms.includes(PERMISSIONS.VIEW_MESSAGES);
+        }
+        return can(PERMISSIONS.VIEW_MESSAGES);
+    }, [simulatedRole, can]);
+
+    const canManageUsers = useMemo(() => {
+        if (simulatedRole) {
+            const simPerms = ROLE_DEFINITIONS[simulatedRole] || [];
+            if (simulatedRole === 'admin') return true;
+            return simPerms.includes(PERMISSIONS.MANAGE_USERS);
+        }
+        return can(PERMISSIONS.MANAGE_USERS);
+    }, [simulatedRole, can]);
+
     // Fetch messages when user is logged in AND has permission
     useEffect(() => {
-        if (user && checkSimulatedPermission(PERMISSIONS.VIEW_MESSAGES)) {
+        if (user && canViewMessages) {
             fetchMessages();
         } else {
             setMessages([]);
         }
-    }, [user, simulatedRole, role, checkSimulatedPermission]); // Re-fetch if role changes
+    }, [user, canViewMessages]); // Re-fetch if role changes
 
     const fetchMessages = async () => {
         try {
@@ -80,12 +98,12 @@ const Admin = () => {
     };
 
     useEffect(() => {
-        if (user && checkSimulatedPermission(PERMISSIONS.MANAGE_USERS)) {
+        if (user && canManageUsers) {
             fetchUsers();
         } else {
             setUsersList([]);
         }
-    }, [user, simulatedRole, role, checkSimulatedPermission]);
+    }, [user, canManageUsers]);
 
     const updateUserRole = async (userId, newRole) => {
         try {
