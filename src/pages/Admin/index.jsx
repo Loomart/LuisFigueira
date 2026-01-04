@@ -9,6 +9,7 @@ import './AdminUsers.css';
 const Admin = () => {
     const { user, signIn, signUp, signOut } = useAuth();
     const { role, can } = useRBAC();
+    const ALLOW_SIGNUP = import.meta.env.VITE_ALLOW_SIGNUP === 'true';
     
     // Auth Form State
     const [isLogin, setIsLogin] = useState(true);
@@ -128,11 +129,13 @@ const Admin = () => {
             if (isLogin) {
                 const { error } = await signIn({ email, password });
                 if (error) throw error;
-            } else {
+            } else if (ALLOW_SIGNUP) {
                 const { error } = await signUp({ email, password });
                 if (error) throw error;
                 alert('¡Registro exitoso! Ya puedes iniciar sesión.');
                 setIsLogin(true); // Switch to login after signup
+            } else {
+                setAuthError('El registro está deshabilitado.');
             }
         } catch (err) {
             setAuthError(err.message || 'Error de autenticación');
@@ -146,7 +149,7 @@ const Admin = () => {
         return (
             <div className="admin-login-container page">
                 <div className="admin-card">
-                    <h2>{isLogin ? '🔒 Iniciar Sesión' : '📝 Registrarse'}</h2>
+                    <h2>{!ALLOW_SIGNUP || isLogin ? '🔒 Iniciar Sesión' : '📝 Registrarse'}</h2>
                     
                     <form onSubmit={handleAuth}>
                         <input
@@ -167,22 +170,24 @@ const Admin = () => {
                             minLength={6}
                         />
                         <button type="submit" className="admin-button" disabled={loading}>
-                            {loading ? 'Procesando...' : (isLogin ? 'Entrar' : 'Registrarme')}
+                            {loading ? 'Procesando...' : (!ALLOW_SIGNUP || isLogin ? 'Entrar' : 'Registrarme')}
                         </button>
                     </form>
 
                     {authError && <p className="admin-error">{authError}</p>}
 
-                    <div className="auth-toggle">
-                        <button 
-                            className="toggle-btn" 
-                            onClick={() => setIsLogin(!isLogin)}
-                        >
-                            {isLogin 
-                                ? '¿No tienes cuenta? Regístrate aquí' 
-                                : '¿Ya tienes cuenta? Inicia sesión'}
-                        </button>
-                    </div>
+                    {ALLOW_SIGNUP && (
+                        <div className="auth-toggle">
+                            <button 
+                                className="toggle-btn" 
+                                onClick={() => setIsLogin(!isLogin)}
+                            >
+                                {isLogin 
+                                    ? '¿No tienes cuenta? Regístrate aquí' 
+                                    : '¿Ya tienes cuenta? Inicia sesión'}
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         );

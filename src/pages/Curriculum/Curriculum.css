@@ -33,6 +33,25 @@
   margin: 0;
 }
 
+.cv-section-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cv-section-details {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.cv-section-details.open {
+  max-height: 2000px;
+  opacity: 1;
+}
+
 .cv-block p {
   font-size: 0.95rem;
   line-height: 1.5;
