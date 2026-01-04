@@ -1,30 +1,35 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-
-// Import translation resources
 import translationES from './locales/es/translation.json';
 import translationEN from './locales/en/translation.json';
 import translationPT from './locales/pt/translation.json';
 
-/**
- * i18next Configuration
- * Initializes the internationalization framework.
- * 
- * - Resources: Loads JSON files for English, Spanish, and Portuguese.
- * - Lng: Sets default language to Spanish ('es').
- * - Fallback: Defaults to Spanish if a key is missing.
- * - Interpolation: React already handles escaping, so it's disabled here.
- */
+const detectInitialLang = () => {
+  try {
+    if (typeof document !== 'undefined') {
+      const m = document.cookie.match(new RegExp('(^| )i18nextLng=([^;]+)'));
+      if (m && m[2]) return m[2];
+    }
+    if (typeof localStorage !== 'undefined') {
+      const saved = localStorage.getItem('i18nextLng');
+      if (saved) return saved;
+    }
+  } catch {
+    return 'en';
+  }
+  return 'en';
+};
+
 i18n.use(initReactI18next).init({
   resources: {
     es: { translation: translationES },
     en: { translation: translationEN },
     pt: { translation: translationPT }
   },
-  lng: 'es', // Default language
-  fallbackLng: 'es',
+  lng: detectInitialLang(),
+  fallbackLng: 'en',
   interpolation: {
-    escapeValue: false // React safe from XSS
+    escapeValue: false
   }
 });
 
