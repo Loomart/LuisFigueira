@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import './ProjectCard.css';
 
@@ -18,12 +18,21 @@ import './ProjectCard.css';
  */
 const ProjectCard = ({ title, image, descriptionKey, link, tech, isOpen, onToggle }) => {
   const { t } = useTranslation();
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <div className={`project-card ${isOpen ? 'open' : ''}`} onClick={onToggle}>
       {/* Fixed height image container */}
       <div className="project-image-container">
-        <img src={image} alt={title} className="project-image" />
+        <img
+          src={image}
+          alt={title}
+          className={`project-image ${loaded ? 'loaded' : ''}`}
+          loading="lazy"
+          decoding="async"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          onLoad={() => setLoaded(true)}
+        />
       </div>
       
       <div className="project-content">

@@ -1,6 +1,6 @@
-import defraggImg from '../assets/images/portfolio/defragg.webp';
-import gxupWebsiteImg from '../assets/images/portfolio/gxupVr.webp';
-import gxupVrImg from '../assets/images/portfolio/gxupWeb.webp';
+import defraggImg from '../assets/images/portfolio/deffrag.webp';
+import gxupWebsiteImg from '../assets/images/portfolio/gxupWeb.webp';
+import gxupVrImg from '../assets/images/portfolio/gxupVr.webp';
 import nccSocGest from '../assets/images/portfolio/nccSocgest.webp';
 
 export const projects = [
