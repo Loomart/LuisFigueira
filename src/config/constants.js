@@ -9,6 +9,7 @@ export const API_ENDPOINTS = {
 export const STORAGE_KEYS = {
   THEME: 'theme',
   LANGUAGE: 'i18nextLng',
+  CONSENT: 'consent.preferences',
 };
 
 export const THEMES = {

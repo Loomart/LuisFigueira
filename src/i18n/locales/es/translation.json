@@ -229,5 +229,11 @@
     "nccsocgest": {
       "description": "Software de gestión interna creado para un club de natación, con funcionalidades centradas en el registro, mantenimiento y control de socios. Desarrollo realizado en entorno Visual Basic."
     }
+  },
+  "consent": {
+    "title": "Consentimiento de cookies",
+    "message": "Usamos cookies técnicas y de preferencias para recordar idioma/tema. No utilizamos cookies de seguimiento ni publicidad.",
+    "onlyNecessary": "Aceptar solo necesarias",
+    "acceptAll": "Aceptar todas"
   }
 }

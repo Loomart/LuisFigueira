@@ -14,6 +14,7 @@ import { useRBAC } from './hooks/useRBAC';
 import { PERMISSIONS } from './config/rbac';
 import { useAuth } from './context/useAuth';
 import { Navigate } from 'react-router-dom';
+import ConsentBanner from './components/ConsentBanner';
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -39,6 +40,7 @@ function App() {
           <Route path="/panel-privado-8743" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         </Routes>
       </main>
+      <ConsentBanner />
     </Router>
   );
 }

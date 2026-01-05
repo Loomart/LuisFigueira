@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { STORAGE_KEYS, COOKIE_KEYS, THEMES } from '../config/constants';
+import { useConsent } from '../context/ConsentContext.jsx';
 
 /**
  * Custom hook for theme management.
@@ -11,21 +12,27 @@ import { STORAGE_KEYS, COOKIE_KEYS, THEMES } from '../config/constants';
  */
 const useTheme = () => {
   const [theme, setTheme] = useState(THEMES.LIGHT);
+  const { consent } = useConsent() || { consent: { preferences: false } };
 
   useEffect(() => {
-    const cookieMatch = document.cookie.match(new RegExp('(^| )' + COOKIE_KEYS.THEME + '=([^;]+)'));
-    const cookieTheme = cookieMatch ? cookieMatch[2] : null;
     const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME);
-    const initialTheme = cookieTheme || savedTheme || THEMES.LIGHT;
+    let initialTheme = savedTheme || THEMES.LIGHT;
+    if (consent?.preferences) {
+      const cookieMatch = document.cookie.match(new RegExp('(^| )' + COOKIE_KEYS.THEME + '=([^;]+)'));
+      const cookieTheme = cookieMatch ? cookieMatch[2] : null;
+      initialTheme = cookieTheme || initialTheme;
+    }
     setTheme(initialTheme);
     document.documentElement.setAttribute('data-theme', initialTheme);
-  }, []);
+  }, [consent]);
 
   const toggleTheme = () => {
     const newTheme = theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
     setTheme(newTheme);
     localStorage.setItem(STORAGE_KEYS.THEME, newTheme);
-    document.cookie = `${COOKIE_KEYS.THEME}=${newTheme}; path=/; max-age=31536000`;
+    if (consent?.preferences) {
+      document.cookie = `${COOKIE_KEYS.THEME}=${newTheme}; path=/; max-age=31536000`;
+    }
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 

@@ -229,5 +229,11 @@
     "nccsocgest": {
       "description": "Internal management software created for a swimming club, with features focused on member registration, tracking and control. Developed in Visual Basic."
     }
+  },
+  "consent": {
+    "title": "Cookie consent",
+    "message": "We use technical and preference cookies to remember language/theme. We do not use tracking or advertising cookies.",
+    "onlyNecessary": "Accept only necessary",
+    "acceptAll": "Accept all"
   }
 }
