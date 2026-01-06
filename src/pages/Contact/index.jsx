@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import './Contact.css';
 import Notification from '../../components/Notification';
 import useContactForm from '../../hooks/useContactForm';
+import { supabaseConfigured } from '../../lib/supabase';
 
 const Contact = () => {
     const { t } = useTranslation();
@@ -50,6 +51,9 @@ const Contact = () => {
 
                 {/* Formulario */}
                 <div className="contact-form-wrapper">
+                    {!supabaseConfigured && (
+                        <div className="contact-maintenance">El formulario está en mantenimiento temporalmente. Por favor usa los enlaces de contacto.</div>
+                    )}
                     <form className="contact-form" onSubmit={submitForm}>
                         <div className="form-group">
                             <label htmlFor="name">{t('contact.name')}</label>
@@ -61,6 +65,7 @@ const Contact = () => {
                                 onChange={handleChange} 
                                 required 
                                 placeholder={t('contact.namePlaceholder')}
+                                disabled={!supabaseConfigured}
                             />
                         </div>
 
@@ -74,6 +79,7 @@ const Contact = () => {
                                 onChange={handleChange} 
                                 required 
                                 placeholder={t('contact.emailPlaceholder')}
+                                disabled={!supabaseConfigured}
                             />
                         </div>
 
@@ -87,10 +93,11 @@ const Contact = () => {
                                 required 
                                 rows="5"
                                 placeholder={t('contact.messagePlaceholder')}
+                                disabled={!supabaseConfigured}
                             ></textarea>
                         </div>
 
-                        <button type="submit" className="submit-btn" disabled={isSubmitting}>
+                        <button type="submit" className="submit-btn" disabled={isSubmitting || !supabaseConfigured}>
                             {isSubmitting ? '...' : t('contact.send')}
                         </button>
                     </form>
