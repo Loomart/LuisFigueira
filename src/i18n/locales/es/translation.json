@@ -214,7 +214,9 @@
     "message": "Mensaje",
     "messagePlaceholder": "Escribe tu mensaje aquí...",
     "send": "Enviar Mensaje",
-    "sentMessage": "¡Gracias por contactar! Te responderé lo antes posible."
+    "sentMessage": "¡Gracias por contactar! Te responderé lo antes posible.",
+    "maintenance": "El formulario está en mantenimiento temporalmente. Por favor usa los enlaces de contacto.",
+    "location": "Madrid, España (Teletrabajo amigable)"
   },
   "projects": {
     "defragg": {

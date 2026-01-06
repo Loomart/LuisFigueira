@@ -37,7 +37,7 @@ const Contact = () => {
                         </div>
                         <div className="contact-item">
                             <span className="icon">📍</span>
-                            <span>Madrid, España (Remote friendly)</span>
+                            <span>{t('contact.location')}</span>
                         </div>
                         <div className="contact-item">
                             <span className="icon">💼</span>
@@ -52,7 +52,7 @@ const Contact = () => {
                 {/* Formulario */}
                 <div className="contact-form-wrapper">
                     {!supabaseConfigured && (
-                        <div className="contact-maintenance">El formulario está en mantenimiento temporalmente. Por favor usa los enlaces de contacto.</div>
+                        <div className="contact-maintenance">{t('contact.maintenance')}</div>
                     )}
                     <form className="contact-form" onSubmit={submitForm}>
                         <div className="form-group">

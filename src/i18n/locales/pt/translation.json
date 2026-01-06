@@ -214,7 +214,9 @@
     "message": "Mensagem",
     "messagePlaceholder": "Escreva a sua mensagem aqui...",
     "send": "Enviar Mensagem",
-    "sentMessage": "Obrigado pelo contacto! Responderei o mais breve possível."
+    "sentMessage": "Obrigado pelo contacto! Responderei o mais breve possível.",
+    "maintenance": "O formulário está temporariamente em manutenção. Por favor, utilize os links de contacto.",
+    "location": "Madrid, Espanha (Remote friendly)"
   },
   "projects": {
     "defragg": {
