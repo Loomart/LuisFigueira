@@ -10,7 +10,7 @@ if (supabaseUrl && supabaseAnonKey) {
   supabaseInstance = createClient(supabaseUrl, supabaseAnonKey);
 } else {
   if (isDev) {
-    console.warn('⚠️ Supabase credentials not found in environment variables. Auth and DB features will be disabled.');
+    console.warn('⚠️ Supabase credentials not found. Using mock only in development.');
     const mockQueryBuilder = () => {
       const builder = {
         select: () => builder,
