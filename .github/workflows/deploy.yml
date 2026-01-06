@@ -32,11 +32,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Debug Supabase env
-        run: |
-          echo "URL present? -> ${{ vars.VITE_SUPABASE_URL != '' }}"
-          echo "KEY present? -> ${{ vars.VITE_SUPABASE_ANON_KEY != '' }}"
-
       - name: Build
         env:
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
