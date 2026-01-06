@@ -45,11 +45,11 @@ const useContactForm = () => {
                 setNotification({ message: t('contact.sentMessage'), type: NOTIFICATION_TYPES.SUCCESS });
                 setFormData({ name: '', email: '', message: '' });
             } else {
-                setNotification({ message: 'Error al enviar el mensaje', type: NOTIFICATION_TYPES.ERROR });
+                setNotification({ message: error?.message ?? String(error), type: NOTIFICATION_TYPES.ERROR });
             }
         } catch (error) {
             console.error('Error:', error);
-            setNotification({ message: 'Error de conexión', type: NOTIFICATION_TYPES.ERROR });
+            setNotification({ message: error?.message ?? 'Error de conexión', type: NOTIFICATION_TYPES.ERROR });
         } finally {
             setIsSubmitting(false);
         }
