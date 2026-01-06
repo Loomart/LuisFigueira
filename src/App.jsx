@@ -18,9 +18,11 @@ import ConsentBanner from './components/ConsentBanner';
 
 function App() {
   const ProtectedRoute = ({ children }) => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
     const { can } = useRBAC();
-    const allowed = user && can(PERMISSIONS.ACCESS_ADMIN_PANEL);
+    if (loading) return children;
+    if (!user) return children;
+    const allowed = can(PERMISSIONS.ACCESS_ADMIN_PANEL);
     if (!allowed) return <Navigate to="/" replace />;
     return children;
   };

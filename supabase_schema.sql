@@ -193,3 +193,31 @@ using (
   OR
   public.is_admin()
 );
+
+-- ==========================================
+-- SECCIÓN F: RPC - PERMISOS ACTUALES DEL USUARIO
+-- Devuelve solo id, email, role, permissions del usuario autenticado
+-- ==========================================
+drop function if exists public.get_current_permissions();
+create or replace function public.get_current_permissions()
+returns table (
+  id uuid,
+  email text,
+  role text,
+  permissions text[]
+)
+language plpgsql
+security definer
+stable
+as $$
+begin
+  return query
+  select p.id, p.email, p.role,
+         coalesce(r.permissions, array[]::text[])
+  from public.profiles p
+  left join public.app_roles r on p.role = r.role_name
+  where p.id = auth.uid();
+end;
+$$;
+
+grant execute on function public.get_current_permissions() to anon, authenticated;

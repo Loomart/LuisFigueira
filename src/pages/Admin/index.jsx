@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase';
 import { ROLES, PERMISSIONS, ROLE_DEFINITIONS } from '../../config/rbac';
 import './Admin.css';
 import './AdminUsers.css';
+import { logger } from '../../lib/logger';
 
 const Admin = () => {
     const { user, signIn, signUp, signOut } = useAuth();
@@ -78,8 +79,8 @@ const Admin = () => {
             
             if (error) throw error;
             setMessages(data || []);
-        } catch (err) {
-            console.error('Error fetching messages from Supabase:', err);
+        } catch {
+            logger.error('Error fetching messages');
             setDataError('No se pudieron cargar los mensajes desde Supabase. Revisa las variables VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY.');
         }
     };
@@ -93,8 +94,8 @@ const Admin = () => {
             
             if (error) throw error;
             setUsersList(data || []);
-        } catch (err) {
-            console.error('Error fetching users:', err);
+        } catch {
+            logger.error('Error fetching users');
         }
     };
 
@@ -207,7 +208,7 @@ const Admin = () => {
     // The user reported "when admin nothing appears, black screen".
     
     // Debugging:
-    console.log('Rendering Admin:', { user: user.email, role, activeRole, hasAccess, messages: messages.length });
+    logger.log('Rendering Admin');
 
     return (
         <div className="admin-dashboard page">
