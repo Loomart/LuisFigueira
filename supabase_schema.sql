@@ -22,6 +22,64 @@ on public.messages for insert
 with check (true);
 
 -- ==========================================
+-- SECCIÓN E: PROTECCIÓN ANTI-SPAM Y RATE LIMIT
+-- Aplicado sobre la tabla public.messages
+-- ==========================================
+
+-- 1) Columna honeypot (hp) para detectar bots rellenando campos ocultos
+alter table public.messages
+add column if not exists hp text not null default '';
+
+-- 2) Índice para acelerar consultas por email/fecha usadas en rate limit
+create index if not exists messages_email_created_at_idx
+on public.messages (email, created_at);
+
+-- 3) Función y trigger: restricciones de envío
+--   - mínimo 60s entre envíos por email
+--   - máximo 5 envíos por día por email
+--   - cortar si el honeypot viene relleno
+create or replace function public.enforce_contact_rate()
+returns trigger
+language plpgsql
+security definer
+as $$
+begin
+  -- Espera mínima entre envíos
+  if exists (
+    select 1
+    from public.messages m
+    where m.email = new.email
+      and m.created_at > now() - interval '60 seconds'
+  ) then
+    raise exception 'Por favor espera 60s antes de enviar de nuevo.' using errcode = '22023';
+  end if;
+
+  -- Máximo por día
+  if (
+    select count(*)
+    from public.messages m
+    where m.email = new.email
+      and m.created_at > now() - interval '1 day'
+  ) >= 5 then
+    raise exception 'Has alcanzado el límite diario de envíos.' using errcode = '22023';
+  end if;
+
+  -- Honeypot activado
+  if coalesce(trim(new.hp), '') <> '' then
+    raise exception 'Protección anti-spam activada.' using errcode = '22023';
+  end if;
+
+  return new;
+end;
+$$;
+
+drop trigger if exists contact_rate_limit on public.messages;
+create trigger contact_rate_limit
+before insert on public.messages
+for each row
+execute procedure public.enforce_contact_rate();
+
+-- ==========================================
 -- SECCIÓN B: PERFILES (auth.users + perfil extendido)
 -- ==========================================
 drop table if exists public.profiles cascade;

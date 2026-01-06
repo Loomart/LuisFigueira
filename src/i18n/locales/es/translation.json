@@ -216,7 +216,10 @@
     "send": "Enviar Mensaje",
     "sentMessage": "¡Gracias por contactar! Te responderé lo antes posible.",
     "maintenance": "El formulario está en mantenimiento temporalmente. Por favor usa los enlaces de contacto.",
-    "location": "Madrid, España (Teletrabajo amigable)"
+    "location": "Madrid, España (Teletrabajo amigable)",
+    "spamDetected": "Protección anti-spam activada.",
+    "rateLimitWait": "Por favor espera {{seconds}}s antes de enviar de nuevo.",
+    "rateLimitDailyMax": "Has alcanzado el límite diario de envíos."
   },
   "projects": {
     "defragg": {

@@ -10,6 +10,7 @@ export const STORAGE_KEYS = {
   THEME: 'theme',
   LANGUAGE: 'i18nextLng',
   CONSENT: 'consent.preferences',
+  CONTACT_RATE: 'contact.rate',
 };
 
 export const THEMES = {
@@ -26,4 +27,9 @@ export const NOTIFICATION_TYPES = {
   ERROR: 'error',
   INFO: 'info',
   WARNING: 'warning',
+};
+
+export const RATE_LIMITS = {
+  CONTACT_MIN_INTERVAL_MS: 60000,
+  CONTACT_MAX_PER_DAY: 5,
 };

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NOTIFICATION_TYPES } from '../config/constants';
+import { NOTIFICATION_TYPES, STORAGE_KEYS, RATE_LIMITS } from '../config/constants';
 import { supabase } from '../lib/supabase';
 
 /**
@@ -20,7 +20,8 @@ const useContactForm = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        message: ''
+        message: '',
+        hp: ''
     });
     const [notification, setNotification] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,13 +38,52 @@ const useContactForm = () => {
         setIsSubmitting(true);
         
         try {
+            if (formData.hp?.trim()) {
+                setNotification({ message: t('contact.spamDetected'), type: NOTIFICATION_TYPES.ERROR });
+                return;
+            }
+
+            const now = Date.now();
+            let record = null;
+            try {
+                record = JSON.parse(localStorage.getItem(STORAGE_KEYS.CONTACT_RATE) || 'null');
+            } catch (_e) { void _e; }
+            const minInterval = RATE_LIMITS.CONTACT_MIN_INTERVAL_MS;
+            const maxPerDay = RATE_LIMITS.CONTACT_MAX_PER_DAY;
+            const startOfToday = new Date();
+            startOfToday.setHours(0,0,0,0);
+            const dayStartTs = startOfToday.getTime();
+            const sameDay = record?.dayStartTs === dayStartTs;
+            const lastTs = record?.lastSubmitTs || 0;
+            const dayCount = sameDay ? (record?.dayCount || 0) : 0;
+            const sinceLast = now - lastTs;
+
+            if (lastTs && sinceLast < minInterval) {
+                const waitSecs = Math.ceil((minInterval - sinceLast) / 1000);
+                setNotification({ message: t('contact.rateLimitWait', { seconds: waitSecs }), type: NOTIFICATION_TYPES.WARNING });
+                return;
+            }
+
+            if (dayCount >= maxPerDay) {
+                setNotification({ message: t('contact.rateLimitDailyMax'), type: NOTIFICATION_TYPES.WARNING });
+                return;
+            }
+
             const { error } = await supabase
                 .from('messages')
-                .insert([{ name: formData.name, email: formData.email, message: formData.message }]);
+                .insert([{ name: formData.name, email: formData.email, message: formData.message, hp: formData.hp || '' }]);
 
             if (!error) {
                 setNotification({ message: t('contact.sentMessage'), type: NOTIFICATION_TYPES.SUCCESS });
-                setFormData({ name: '', email: '', message: '' });
+                setFormData({ name: '', email: '', message: '', hp: '' });
+                const newRecord = {
+                    lastSubmitTs: now,
+                    dayStartTs,
+                    dayCount: dayCount + 1
+                };
+                try {
+                    localStorage.setItem(STORAGE_KEYS.CONTACT_RATE, JSON.stringify(newRecord));
+                } catch (_e) { void _e; }
             } else {
                 setNotification({ message: error?.message ?? String(error), type: NOTIFICATION_TYPES.ERROR });
             }

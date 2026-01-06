@@ -216,7 +216,10 @@
     "send": "Send Message",
     "sentMessage": "Thanks for contacting! I will reply as soon as possible.",
     "maintenance": "The form is temporarily under maintenance. Please use the contact links.",
-    "location": "Madrid, Spain (Remote friendly)"
+    "location": "Madrid, Spain (Remote friendly)",
+    "spamDetected": "Anti-spam protection triggered.",
+    "rateLimitWait": "Please wait {{seconds}}s before sending again.",
+    "rateLimitDailyMax": "You have reached the daily submission limit."
   },
   "projects": {
     "defragg": {

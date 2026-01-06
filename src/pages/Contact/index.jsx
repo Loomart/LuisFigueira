@@ -55,6 +55,17 @@ const Contact = () => {
                         <div className="contact-maintenance">{t('contact.maintenance')}</div>
                     )}
                     <form className="contact-form" onSubmit={submitForm}>
+                        <input
+                            type="text"
+                            id="hp"
+                            name="hp"
+                            value={formData.hp || ''}
+                            onChange={handleChange}
+                            style={{ position: 'absolute', left: '-10000px', opacity: 0 }}
+                            tabIndex="-1"
+                            aria-hidden="true"
+                            autoComplete="off"
+                        />
                         <div className="form-group">
                             <label htmlFor="name">{t('contact.name')}</label>
                             <input 
