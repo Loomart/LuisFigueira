@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NOTIFICATION_TYPES, STORAGE_KEYS, RATE_LIMITS } from '../config/constants';
 import { supabase } from '../lib/supabase';
+import { logger } from '../lib/logger';
 
 /**
  * Custom hook for managing the contact form logic.
@@ -88,7 +89,7 @@ const useContactForm = () => {
                 setNotification({ message: error?.message ?? String(error), type: NOTIFICATION_TYPES.ERROR });
             }
         } catch (error) {
-            console.error('Error:', error);
+            logger.error('Error:', error);
             setNotification({ message: error?.message ?? 'Error de conexión', type: NOTIFICATION_TYPES.ERROR });
         } finally {
             setIsSubmitting(false);

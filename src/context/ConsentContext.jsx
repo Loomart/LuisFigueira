@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ConsentContext } from './ConsentContextBase';
 import { STORAGE_KEYS } from '../config/constants';
-
-const ConsentContext = createContext();
 
 export const ConsentProvider = ({ children }) => {
   const [consent, setConsent] = useState({ decided: false, preferences: false });
@@ -35,5 +34,4 @@ export const ConsentProvider = ({ children }) => {
   return <ConsentContext.Provider value={value}>{children}</ConsentContext.Provider>;
 };
 
-export const useConsent = () => useContext(ConsentContext);
 

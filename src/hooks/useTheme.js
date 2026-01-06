@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { STORAGE_KEYS, COOKIE_KEYS, THEMES } from '../config/constants';
-import { useConsent } from '../context/ConsentContext.jsx';
+import { useConsent } from '../context/useConsent';
 
 /**
  * Custom hook for theme management.

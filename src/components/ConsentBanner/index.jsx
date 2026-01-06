@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useConsent } from '../../context/ConsentContext.jsx';
+import { useConsent } from '../../context/useConsent';
 import './ConsentBanner.css';
 
 const ConsentBanner = () => {
@@ -27,4 +27,3 @@ const ConsentBanner = () => {
 };
 
 export default ConsentBanner;
-

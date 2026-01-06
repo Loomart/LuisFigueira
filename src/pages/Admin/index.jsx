@@ -116,7 +116,7 @@ const Admin = () => {
             if (error) throw error;
             await fetchUsers();
         } catch (err) {
-            console.error('Error updating user role:', err);
+            logger.error('Error updating user role:', err);
             setDataError('No se pudo actualizar el rol del usuario.');
         }
     };

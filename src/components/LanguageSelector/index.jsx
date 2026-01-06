@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './LanguageSelector.css';
 import { STORAGE_KEYS } from '../../config/constants';
-import { useConsent } from '../../context/ConsentContext.jsx';
+import { useConsent } from '../../context/useConsent';
 
 const LanguageSelector = () => {
   const { i18n } = useTranslation();
