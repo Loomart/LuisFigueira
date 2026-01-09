@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/useAuth';
 import { useRBAC } from '../../hooks/useRBAC';
 import { supabase } from '../../lib/supabase';
@@ -8,8 +9,9 @@ import './AdminUsers.css';
 import { logger } from '../../lib/logger';
 
 const Admin = () => {
-    const { user, signIn, signUp, signOut } = useAuth();
+    const { user, signIn, signUp, signOut, createAdminUser } = useAuth();
     const { role, can } = useRBAC();
+    const navigate = useNavigate();
     const ALLOW_SIGNUP = import.meta.env.VITE_ALLOW_SIGNUP === 'true';
     
     // Auth Form State
@@ -145,6 +147,15 @@ const Admin = () => {
         }
     };
 
+    const handleSignOut = async () => {
+        try {
+            await signOut();
+            navigate('/'); // Redirigir a la página principal después de cerrar sesión
+        } catch (error) {
+            logger.error('Error al cerrar sesión:', error);
+        }
+    };
+
     // 1. Not Logged In
     if (!user) {
         return (
@@ -237,7 +248,7 @@ const Admin = () => {
                             </select>
                         </div>
                     )}
-                    <button onClick={signOut} className="admin-logout">Cerrar Sesión</button>
+                    <button onClick={handleSignOut} className="admin-logout">Cerrar Sesión</button>
                 </div>
             </div>
 
@@ -245,6 +256,20 @@ const Admin = () => {
                  <div className="admin-card access-denied">
                     <h2>⛔ Acceso Limitado</h2>
                     <p>Tu rol actual ({activeRole}) no tiene permisos para ver el panel de administración.</p>
+                    {role !== 'admin' && (
+                        <button 
+                            onClick={async () => {
+                                const success = await createAdminUser();
+                                if (success) {
+                                    window.location.reload(); // Recargar para actualizar el perfil
+                                }
+                            }} 
+                            className="admin-button"
+                            style={{ marginTop: '1rem' }}
+                        >
+                            Convertirse en Admin (Desarrollo)
+                        </button>
+                    )}
                 </div>
             ) : (
                 <div className="dashboard-grid">

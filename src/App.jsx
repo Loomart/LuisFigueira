@@ -10,20 +10,25 @@ import Curriculum from './pages/Curriculum';
 import Certifications from './pages/Certifications';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
-import { useRBAC } from './hooks/useRBAC';
-import { PERMISSIONS } from './config/rbac';
 import { useAuth } from './context/useAuth';
-import { Navigate } from 'react-router-dom';
 import ConsentBanner from './components/ConsentBanner';
 
 function App() {
   const ProtectedRoute = ({ children }) => {
-    const { user, loading } = useAuth();
-    const { can } = useRBAC();
-    if (loading) return children;
-    if (!user) return children;
-    const allowed = can(PERMISSIONS.ACCESS_ADMIN_PANEL);
-    if (!allowed) return <Navigate to="/" replace />;
+    const { loading } = useAuth();
+    
+    // Mostrar un loader mientras se verifica la autenticación
+    if (loading) {
+      return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <p>Cargando...</p>
+      </div>;
+    }
+    
+    // NOTA: Hemos eliminado la redirección automática aquí porque el componente Admin
+    // maneja internamente dos estados importantes que queremos mostrar:
+    // 1. Si no hay usuario -> Muestra formulario de Login
+    // 2. Si hay usuario sin permisos -> Muestra pantalla de "Acceso Limitado" con botón para hacerse admin
+    
     return children;
   };
 
