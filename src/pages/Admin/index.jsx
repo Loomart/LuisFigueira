@@ -123,6 +123,34 @@ const Admin = () => {
         }
     };
 
+    // Message Actions
+    const handleReply = (msg) => {
+        const subject = `Re: Contacto desde Portfolio - ${msg.subject || 'Consulta'}`;
+        const body = `Hola ${msg.name},\n\nGracias por tu mensaje.\n\n`;
+        const mailtoLink = `mailto:${msg.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.open(mailtoLink, '_blank');
+    };
+
+    const handleDeleteMessage = async (id) => {
+        if (!window.confirm('¿Estás seguro de que deseas eliminar este mensaje?')) return;
+
+        try {
+            const { error } = await supabase
+                .from('messages')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+
+            // Actualizar el estado local
+            setMessages(prev => prev.filter(msg => msg.id !== id));
+            logger.info('Mensaje eliminado');
+        } catch (error) {
+            logger.error('Error al eliminar mensaje:', error);
+            setDataError('Error al eliminar el mensaje');
+        }
+    };
+
     const handleAuth = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -302,10 +330,20 @@ const Admin = () => {
                                             {/* Action Buttons based on permissions */}
                                             <div className="message-actions">
                                                 {checkSimulatedPermission(PERMISSIONS.REPLY_MESSAGES) && (
-                                                    <button className="action-btn reply">Responder</button>
+                                                    <button 
+                                                        className="action-btn reply"
+                                                        onClick={() => handleReply(msg)}
+                                                    >
+                                                        Responder
+                                                    </button>
                                                 )}
                                                 {checkSimulatedPermission(PERMISSIONS.DELETE_MESSAGES) && (
-                                                    <button className="action-btn delete">Eliminar</button>
+                                                    <button 
+                                                        className="action-btn delete"
+                                                        onClick={() => handleDeleteMessage(msg.id)}
+                                                    >
+                                                        Eliminar
+                                                    </button>
                                                 )}
                                             </div>
                                         </div>
