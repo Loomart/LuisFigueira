@@ -50,12 +50,7 @@ const ProjectCard = ({ title, image, descriptionKey, link, tech, isOpen, onToggl
               ))}
             </div>
 
-            {/* Action Button */}
-            {link && (
-              <a href={link} target="_blank" rel="noopener noreferrer" className="project-button" onClick={(e) => e.stopPropagation()}>
-                {t('certifications.view') || 'Ver proyecto'}
-              </a>
-            )}
+
           </div>
         )}
       </div>
