@@ -33,3 +33,5 @@ formularios/
 .env.development.local
 .env.test.local
 .env.production.local
+.aider*
+examples/
