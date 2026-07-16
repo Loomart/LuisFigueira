@@ -1,150 +1,178 @@
-/* src/pages/Curriculum.css */
-
-.curriculum-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  background-color: #ffffff;
-  color: #333333;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  border-radius: 8px;
+/* Resume / Reset Básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.curriculum-header {
-  text-align: center;
-  margin-bottom: 40px;
+body {
+    background-color: #0f172a; /* Azul oscuro profundo (Slate 900) */
+    color: #f1f5f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
 }
 
-.curriculum-header h1 {
-  font-size: 2.5rem;
-  color: #2c3e50;
-  margin-bottom: 10px;
+/* Contenedor Principal del Mapa */
+.curriculum {
+    position: relative;
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.curriculum-header p {
-  color: #7f8c8d;
-  font-size: 1.1rem;
+/* Estilo de los Nodos (Tarjetas) */
+.cv-block {
+    position: relative;
+    width: 100%;
+    margin-bottom: 4rem;
+    padding: 1.5rem;
+    background: rgba(30, 41, 59, 0.7); /* Slate 800 transparente */
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
 }
 
-.section-title {
-  font-size: 1.8rem;
-  color: #2c3e50;
-  border-bottom: 2px solid #ecf0f1;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.cv-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.1); /* Glow cyan */
+    border-color: rgba(56, 189, 248, 0.5);
 }
 
-.section-title i {
-  color: #3498db;
+/* Títulos de las Secciones */
+.cv-section-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
 }
 
-/* Lista de Experiencia */
-.experience-item {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 15px;
-  margin-bottom: 20px;
-  background: #fafafa;
-  padding: 15px;
-  border-radius: 6px;
-  border-left: 4px solid #3498db;
+.cv-section-toggle h3 {
+    font-size: 1.5rem;
+    color: #38bdf8; /* Cyan */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
 
-.date-box {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #7f8c8d;
-  background: #ecf0f1;
-  padding: 10px;
-  border-radius: 4px;
-  text-align: center;
-  height: fit-content;
+.toggle-icon {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    transition: transform 0.3s ease;
+    display: inline-block;
 }
 
-.job-details h3 {
-  margin: 0 0 5px 0;
-  font-size: 1.2rem;
-  color: #2c3e50;
+.toggle-icon.rotated {
+    transform: rotate(180deg);
+    color: #fff;
 }
 
-.job-details h4 {
-  margin: 0 0 10px 0;
-  font-size: 1rem;
-  font-weight: normal;
-  color: #7f8c8d;
-  font-style: italic;
+/* Contenido Colapsable */
+.cv-section-details {
+    max-height: 2000px; /* Altura arbitraria para scroll */
+    opacity: 1;
+    transition: all 0.5s ease;
+    overflow: hidden;
 }
 
-.job-details ul {
-  list-style-position: inside;
-  margin: 0;
-  color: #555;
-  line-height: 1.5;
+.cv-section-details.open {
+    max-height: 2000px;
+    opacity: 1;
 }
 
-/* Estilos para tarjetas */
-.card {
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  padding: 20px;
-  margin-bottom: 20px;
-  transition: transform 0.2s ease-in-out;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+.cv-section-details.collapsed {
+    max-height: 0;
+    opacity: 0;
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+/* Grid de Tarjetas Internas */
+.cv-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding-top: 1rem;
 }
 
-.card h3 {
-  margin-top: 0;
-  color: #2c3e50;
+/* Estilo Individual de las Cards (Herencia) */
+/* Asegúrate de que tus componentes (ExperienceCard, etc.) tengan un estilo base compatible.
+   Si no, agregamos clases auxiliares aquí para asegurar el diseño: */
+
+.cv-card-item, .cv-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: all 0.2s;
+    position: relative;
 }
 
-.card h4 {
-  color: #3498db;
-  font-weight: normal;
+.cv-card-item:hover, .cv-card:hover {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: #38bdf8;
 }
 
-/* Footer del Curriculum */
-.contact-info {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #ecf0f1;
-  margin-top: 20px;
+/* Conector de Línea (Efecto Mind Map) */
+/* Dibuja una línea vertical desde el título hacia abajo */
+.cv-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 0%; /* Ajustado según el estado */
+    background: linear-gradient(to bottom, #38bdf8, #818cf8, #c084fc);
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+    transition: height 0.5s ease;
+    z-index: -1;
 }
 
-.contact-link {
-  text-decoration: none;
-  color: #555;
-  font-weight: bold;
-  transition: color 0.3s;
+.cv-block.collapsed::before {
+    height: 0;
 }
 
-.contact-link:hover {
-  color: #3498db;
+.cv-block:not(.collapsed)::before {
+    height: 100%;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .experience-item {
-    grid-template-columns: 1fr;
-  }
-  
-  .date-box {
-    text-align: left;
-  }
+/* Estilos para el Perfil (Círculo Central o Nómina de Raíz) */
+#profile-card {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    padding: 2rem;
+    margin: 0 auto 4rem auto; /* Espacio extra abajo */
+    border: 1px solid #38bdf8;
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+}
 
-  .curriculum-header h1 {
-    font-size: 2rem;
-  }
+#profile-card img {
+    border-radius: 50%;
+    border: 3px solid #38bdf8;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .cv-block {
+        border-left: 4px solid #38bdf8; /* Línea lateral en móviles */
+    }
+    
+    .cv-block::before {
+        left: 50%; /* Mantenemos la conexión al centro en móvil */
+        width: 2px;
+    }
+
+    .cv-card-grid {
+        grid-template-columns: 1fr;
+    }
 }
