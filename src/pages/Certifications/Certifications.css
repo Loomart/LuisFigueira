@@ -1,3 +1,5 @@
+/* src\pages\Certifications\Certifications.css */
+
 .certifications-section {
   all: unset;
   display: block;
@@ -6,15 +8,12 @@
   margin: 0 auto;
 }
 
-
 .cert-title {
   text-align: center !important;
   border: none !important;
   margin: 0 auto 2rem auto;
   display: block;
 }
-
-
 
 .certifications-grid {
   display: grid;
@@ -88,12 +87,19 @@
   position: relative;
   max-width: 90%;
   max-height: 90%;
-  overflow: auto;
   animation: scaleIn 0.3s ease-in-out;
 }
 
-.cert-modal-content img {
+/* Merged duplicate selectors for specificity */
+.cert-modal .cert-modal-content img {
   width: 100%;
+  max-width: 95%;  /* Makes image 95% of the modal width */
+  max-height: 95%; /* Makes image 95% of the modal height */
+  
+  object-fit: contain; /* Ensures the image isn't stretched and fits fully inside the 5% space */
+  height: auto;
+  display: block;
+  margin: 0 auto;
   border-radius: 8px;
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
 }
