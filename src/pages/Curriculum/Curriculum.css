@@ -1,178 +1,81 @@
-/* Resume / Reset Básico */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* Curriculum.css limpio y visualmente mejorado */
 
-body {
-    background-color: #0f172a; /* Azul oscuro profundo (Slate 900) */
-    color: #f1f5f9;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-}
-
-/* Contenedor Principal del Mapa */
 .curriculum {
-    position: relative;
-    max-width: 1100px;
-    margin: 3rem auto;
-    padding: 0 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  max-width: 960px;
+  margin: 3rem auto;
+  padding: 6rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
-/* Estilo de los Nodos (Tarjetas) */
 .cv-block {
-    position: relative;
-    width: 100%;
-    margin-bottom: 4rem;
-    padding: 1.5rem;
-    background: rgba(30, 41, 59, 0.7); /* Slate 800 transparente */
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
+  width: 100%;
+  background: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  min-width: 280px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-.cv-block:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.1); /* Glow cyan */
-    border-color: rgba(56, 189, 248, 0.5);
+.cv-block h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  border-left: 4px solid var(--primary-color);
+  padding-left: 0.6rem;
+  margin: 0;
 }
 
-/* Títulos de las Secciones */
 .cv-section-toggle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 1rem;
-    position: relative;
-    z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
 }
 
-.cv-section-toggle h3 {
-    font-size: 1.5rem;
-    color: #38bdf8; /* Cyan */
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-}
-
-.toggle-icon {
-    font-size: 0.8rem;
-    color: #94a3b8;
-    transition: transform 0.3s ease;
-    display: inline-block;
-}
-
-.toggle-icon.rotated {
-    transform: rotate(180deg);
-    color: #fff;
-}
-
-/* Contenido Colapsable */
 .cv-section-details {
-    max-height: 2000px; /* Altura arbitraria para scroll */
-    opacity: 1;
-    transition: all 0.5s ease;
-    overflow: hidden;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
 }
 
 .cv-section-details.open {
-    max-height: 2000px;
-    opacity: 1;
+  max-height: 2000px;
+  opacity: 1;
 }
 
-.cv-section-details.collapsed {
-    max-height: 0;
-    opacity: 0;
+.cv-block p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--text-color);
 }
 
-/* Grid de Tarjetas Internas */
 .cv-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-/* Estilo Individual de las Cards (Herencia) */
-/* Asegúrate de que tus componentes (ExperienceCard, etc.) tengan un estilo base compatible.
-   Si no, agregamos clases auxiliares aquí para asegurar el diseño: */
-
-.cv-card-item, .cv-card {
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(148, 163, 184, 0.1);
-    padding: 1.5rem;
-    border-radius: 12px;
-    transition: all 0.2s;
-    position: relative;
+.experience-card,
+.education-card,
+.language-card,
+.skill-card {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.cv-card-item:hover, .cv-card:hover {
-    background: rgba(30, 41, 59, 0.9);
-    border-color: #38bdf8;
-}
-
-/* Conector de Línea (Efecto Mind Map) */
-/* Dibuja una línea vertical desde el título hacia abajo */
-.cv-block::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 2px;
-    height: 0%; /* Ajustado según el estado */
-    background: linear-gradient(to bottom, #38bdf8, #818cf8, #c084fc);
-    box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
-    transition: height 0.5s ease;
-    z-index: -1;
-}
-
-.cv-block.collapsed::before {
-    height: 0;
-}
-
-.cv-block:not(.collapsed)::before {
-    height: 100%;
-}
-
-/* Estilos para el Perfil (Círculo Central o Nómina de Raíz) */
-#profile-card {
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
-    padding: 2rem;
-    margin: 0 auto 4rem auto; /* Espacio extra abajo */
-    border: 1px solid #38bdf8;
-    box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
-}
-
-#profile-card img {
-    border-radius: 50%;
-    border: 3px solid #38bdf8;
-    margin-bottom: 1rem;
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
-}
-
-/* Responsive para móviles */
-@media (max-width: 768px) {
-    .cv-block {
-        border-left: 4px solid #38bdf8; /* Línea lateral en móviles */
-    }
-    
-    .cv-block::before {
-        left: 50%; /* Mantenemos la conexión al centro en móvil */
-        width: 2px;
-    }
-
-    .cv-card-grid {
-        grid-template-columns: 1fr;
-    }
+.card-details,
+.card-toggle {
+  font-size: 0.92rem;
 }
