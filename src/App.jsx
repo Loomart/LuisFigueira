@@ -10,6 +10,7 @@ import Curriculum from './pages/Curriculum';
 import Certifications from './pages/Certifications';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
+import Games from './pages/Games';
 import { useAuth } from './context/useAuth';
 import ConsentBanner from './components/ConsentBanner';
 
@@ -45,6 +46,7 @@ function App() {
           <Route path="/certificaciones" element={<Certifications />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/panel-privado-8743" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+          <Route path="/games" element={<Games />} />
         </Routes>
       </main>
       <ConsentBanner />

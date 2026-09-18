@@ -221,6 +221,11 @@
     "rateLimitWait": "Please wait {{seconds}}s before sending again.",
     "rateLimitDailyMax": "You have reached the daily submission limit."
   },
+  "games": {
+    "title": "🎮 Educational Games",
+    "subtitle": "Fun games for little learners!",
+    "playGame": "🎮 Play Game"
+  },
   "projects": {
     "defragg": {
       "description": "Educational video game focused on cybersecurity, designed as a first-person shooter in Unity. The player controls a symbolic character (a computer) who eliminates digital threats by shooting antivirus packets."
