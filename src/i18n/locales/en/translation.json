@@ -204,7 +204,6 @@
       "theoryBehindProgramming": "Theory Behind Programming"
     }
   },
-  "games": "Games",
   "contact": {
     "title": "Contact",
     "subtitle": "Have a project in mind or want to chat? Contact me!",
@@ -223,7 +222,7 @@
     "rateLimitDailyMax": "You have reached the daily submission limit."
   },
   "games": {
-    "title": "🎮 Educational Games",
+    "title": "Games",
     "subtitle": "Fun games for little learners!",
     "playGame": "🎮 Play Game"
   },

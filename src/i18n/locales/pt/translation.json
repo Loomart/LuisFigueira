@@ -204,7 +204,6 @@
       "theoryBehindProgramming": "Teoria da Programação"
     }
   },
-  "games": "Jogos",
   "contact": {
     "title": "Contactos",
     "subtitle": "Tem um projeto em mente ou quer conversar? Fale comigo!",
@@ -223,7 +222,7 @@
     "rateLimitDailyMax": "Atingiu o limite diário de envios."
   },
   "games": {
-    "title": "🎮 Jogos Educativos",
+    "title": "Jogos",
     "subtitle": "Jogos divertidos para pequenos aprendizes!",
     "playGame": "🎮 Jogar ao Jogo"
   },
