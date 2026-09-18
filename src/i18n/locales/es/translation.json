@@ -221,6 +221,11 @@
     "rateLimitWait": "Por favor espera {{seconds}}s antes de enviar de nuevo.",
     "rateLimitDailyMax": "Has alcanzado el límite diario de envíos."
   },
+  "games": {
+    "title": "🎮 Juegos Educativos",
+    "subtitle": "¡Juegos divertidos para pequeños aprendices!",
+    "playGame": "🎮 Jugar al Juego"
+  },
   "projects": {
     "defragg": {
       "description": "Videojuego educativo con enfoque en ciberseguridad, diseñado como FPS en Unity. El jugador controla un personaje simbólico (un ordenador) que combate amenazas digitales mediante disparos de antivirus."
