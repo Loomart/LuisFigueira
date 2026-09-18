@@ -50,6 +50,7 @@ const Header = () => {
               <li><Link to="/cv" onClick={handleClose}>{t('cv.title')}</Link></li>
               <li><Link to="/certificaciones" onClick={handleClose}>{t('certifications.title')}</Link></li>
               <li><Link to="/contacto" onClick={handleClose}>{t('contact.title')}</Link></li>
+              <li><Link to="/games" onClick={handleClose}>{t('games')}</Link></li>
             </ul>
           </nav>
         </div>
