@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './Games.css';
 
