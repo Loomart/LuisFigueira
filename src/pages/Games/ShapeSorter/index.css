@@ -1,0 +1,47 @@
+.draggable {
+  transition: transform 0.2s ease-in-out;
+}
+
+.draggable:active {
+  transform: scale(1.1);
+}
+
+.hole {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  border-radius: 50%;
+  background-color: red;
+}
+
+.square {
+  border-radius: 0;
+  background-color: blue;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid green;
+  background-color: transparent;
+}
+
+.game-board {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .game-board {
+    flex-direction: column;
+  }
+}
