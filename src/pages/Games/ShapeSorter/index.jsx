@@ -8,50 +8,105 @@ const ShapeSorter = ({ onBack }) => {
   ]);
 
   const [holes, setHoles] = useState([
-    { id: 1, type: null, color: null },
-    { id: 2, type: null, color: null },
-    { id: 3, type: null, color: null },
+    { id: 1, type: 'circle', color: 'red' },
+    { id: 2, type: 'square', color: 'blue' },
+    { id: 3, type: 'triangle', color: 'green' },
   ]);
 
-  const [dragItem, setDragItem] = useState(null);
-  const dragItemRef = useRef(null);
-  const dragOffset = useRef({ x: 0, y: 0 });
+  const [draggedShape, setDraggedShape] = useState(null);
+  const dragElementRef = useRef(null);
 
-  // Initialize holes with proper types
+  // Track pointer position for touch/mouse dragging
+  const [pointerPos, setPointerPos] = useState({ x: 0, y: 0 });
+
   useEffect(() => {
-    setHoles([
-      { id: 1, type: 'circle', color: 'red' },
-      { id: 2, type: 'square', color: 'blue' },
-      { id: 3, type: 'triangle', color: 'green' },
-    ]);
-  }, []);
+    const handlePointerMove = (e) => {
+      if (!draggedShape) return;
+      
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      setPointerPos({ x: clientX, y: clientY });
+    };
 
-  const handleDragStart = (e, item) => {
+    const handlePointerUp = (e) => {
+      if (!draggedShape) return;
+      
+      // Check what element is under the pointer
+      const target = document.elementFromPoint(
+        e.touches ? e.touches[0].clientX : e.clientX,
+        e.touches ? e.touches[0].clientY : e.clientY
+      );
+      
+      const holeElement = target?.closest('.hole');
+      
+      if (holeElement) {
+        const holeId = parseInt(holeElement.dataset.id);
+        const hole = holes[holeId - 1];
+        
+        // Validate shape type matches hole type
+        if (draggedShape.type === hole.type) {
+          setShapes(prev => prev.filter(s => s.id !== draggedShape.id));
+          setHoles(prev => prev.map(h => 
+            h.id === holeId ? { ...h, type: draggedShape.type, color: draggedShape.color } : h
+          ));
+        }
+      }
+      
+      // Reset drag state
+      setDraggedShape(null);
+    };
+
+    document.addEventListener('pointermove', handlePointerMove);
+    document.addEventListener('pointerup', handlePointerUp);
+    
+    return () => {
+      document.removeEventListener('pointermove', handlePointerMove);
+      document.removeEventListener('pointerup', handlePointerUp);
+    };
+  }, [draggedShape, holes]);
+
+  const handleDragStart = (e, shape) => {
     e.preventDefault();
     e.stopPropagation();
     
-    // Support both mouse and touch events
-    const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-    const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+    setDraggedShape(shape);
     
-    dragItemRef.current = item;
-    setDragItem(item);
-    
-    // Calculate offset from the element's top-left corner
+    // Get initial position
     const rect = e.target.getBoundingClientRect();
-    dragOffset.current = {
-      x: clientX - rect.left,
-      y: clientY - rect.top,
-    };
+    const containerRect = document.querySelector('.game-container').getBoundingClientRect();
+    
+    // Calculate offset from element center
+    const offsetX = (rect.width / 2) - (rect.left - containerRect.left);
+    const offsetY = (rect.height / 2) - (rect.top - containerRect.top);
+    
+    setPointerPos({ x: e.clientX, y: e.clientY });
   };
 
   const handleDragOver = (e) => {
     e.preventDefault();
     e.stopPropagation();
     
-    // Allow drop on any hole element
-    if (e.target.classList.contains('hole')) {
+    if (draggedShape && e.target.classList.contains('hole')) {
       e.dataTransfer.dropEffect = 'move';
+      
+      // Add hover visual feedback
+      const holeId = parseInt(e.target.dataset.id);
+      const hole = holes[holeId - 1];
+      
+      if (draggedShape.type === hole.type) {
+        e.target.classList.add('hover');
+      } else {
+        e.target.classList.remove('hover');
+      }
+    }
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (draggedShape && e.target.classList.contains('hole')) {
+      e.target.classList.remove('hover');
     }
   };
 
@@ -59,26 +114,24 @@ const ShapeSorter = ({ onBack }) => {
     e.preventDefault();
     e.stopPropagation();
     
-    const itemData = e.dataTransfer.getData('application/json');
-    if (!itemData) return;
-
-    const item = JSON.parse(itemData);
+    const hole = holes[holeId - 1];
     
-    // Check if shape type matches hole type
-    if (item.type === holes[holeId - 1]?.type) {
-      setShapes(prev => prev.filter(s => s.id !== item.id));
-      setHoles(prev => prev.map(hole => 
-        hole.id === holeId ? { ...hole, type: item.type, color: item.color } : hole
+    if (draggedShape && draggedShape.type === hole.type) {
+      setShapes(prev => prev.filter(s => s.id !== draggedShape.id));
+      setHoles(prev => prev.map(h => 
+        h.id === holeId ? { ...h, type: draggedShape.type, color: draggedShape.color } : h
       ));
-    } else {
-      // Visual feedback for wrong shape
-      e.dataTransfer.dropEffect = 'none';
     }
+    
+    e.target.classList.remove('hover');
   };
 
-  const handleDragEnd = () => {
-    setDragItem(null);
-    dragItemRef.current = null;
+  const handlePointerDown = (e, shape) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    setDraggedShape(shape);
+    setPointerPos({ x: e.clientX, y: e.clientY });
   };
 
   const resetGame = () => {
@@ -88,9 +141,9 @@ const ShapeSorter = ({ onBack }) => {
       { id: 3, type: 'triangle', color: 'green' },
     ]);
     setHoles([
-      { id: 1, type: null, color: null },
-      { id: 2, type: null, color: null },
-      { id: 3, type: null, color: null },
+      { id: 1, type: 'circle', color: 'red' },
+      { id: 2, type: 'square', color: 'blue' },
+      { id: 3, type: 'triangle', color: 'green' },
     ]);
   };
 
@@ -98,67 +151,16 @@ const ShapeSorter = ({ onBack }) => {
     return holes.every(hole => hole.type !== null);
   };
 
-  const handleTouchStart = (e, item) => {
-    e.preventDefault();
-    const touch = e.touches[0];
-    const clientX = touch.clientX;
-    const clientY = touch.clientY;
-    
-    dragItemRef.current = item;
-    setDragItem(item);
-    
-    const rect = e.target.getBoundingClientRect();
-    dragOffset.current = {
-      x: clientX - rect.left,
-      y: clientY - rect.top,
-    };
-  };
-
-  const handleTouchMove = (e) => {
-    if (!dragItemRef.current) return;
-    
-    e.preventDefault();
-    const touch = e.touches[0];
-    const containerRect = document.querySelector('.game-container').getBoundingClientRect();
-    
-    const x = touch.clientX - containerRect.left - dragOffset.current.x;
-    const y = touch.clientY - containerRect.top - dragOffset.current.y;
-    
-    if (dragItemRef.current) {
-      dragItemRef.current.style.transform = `translate(${x}px, ${y}px)`;
-    }
-  };
-
-  const handleTouchEnd = (e) => {
-    if (!dragItemRef.current) return;
-    
-    const touch = e.changedTouches[0];
-    const containerRect = document.querySelector('.game-container').getBoundingClientRect();
-    const x = touch.clientX - containerRect.left;
-    const y = touch.clientY - containerRect.top;
-    
-    // Check if dropped on a hole
-    const elementBelow = document.elementFromPoint(x, y);
-    const holeElement = elementBelow?.closest('.hole');
-    
-    if (holeElement) {
-      const holeId = parseInt(holeElement.dataset.id);
-      handleDrop({ preventDefault: () => {}, stopPropagation: () => {} }, holeId);
-    }
-    
-    handleDragEnd();
-  };
-
   return (
     <div className="games-page">
       <button onClick={onBack} className="back-button">← Back to Games</button>
       
-      <div className="game-container" 
-           onDragOver={handleDragOver}
-           onDrop={(e) => handleDrop(e, 0)} // Fallback drop handler
-           onTouchMove={handleTouchMove}
-           onTouchEnd={handleTouchEnd}>
-        
+      <div 
+        className="game-container"
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={(e) => handleDrop(e, 0)}
+      >
         {/* Shapes */}
         {shapes.map(shape => (
           <div
@@ -166,9 +168,13 @@ const ShapeSorter = ({ onBack }) => {
             className={`shape ${shape.type}`}
             draggable
             onDragStart={(e) => handleDragStart(e, shape)}
-            ref={dragItemRef}
+            onPointerDown={(e) => handlePointerDown(e, shape)}
             style={{
-              transform: dragItem ? `translate(${dragItem.style.transform.split(',')[0]}px, ${dragItem.style.transform.split(',')[1]}px)` : 'none',
+              position: 'absolute',
+              left: pointerPos.x - 30,
+              top: pointerPos.y - 30,
+              zIndex: draggedShape ? 100 : 1,
+              cursor: draggedShape ? 'grabbing' : 'grab',
             }}
           >
             {shape.type === 'circle' && (
@@ -196,9 +202,10 @@ const ShapeSorter = ({ onBack }) => {
         {holes.map(hole => (
           <div
             key={hole.id}
-            className={`hole ${hole.type || 'empty'} ${dragItem && dragItem.type === hole.type ? 'hover' : ''}`}
+            className={`hole ${hole.type || 'empty'} ${draggedShape && draggedShape.type === hole.type ? 'hover' : ''}`}
             data-id={hole.id}
-            onDragOver={handleDragOver}
+            onDragOver={(e) => handleDragOver(e)}
+            onDragLeave={handleDragLeave}
             onDrop={(e) => handleDrop(e, hole.id)}
           >
             {hole.type && (

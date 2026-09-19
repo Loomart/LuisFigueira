@@ -35,9 +35,10 @@
 /* Shapes */
 .shape {
   cursor: grab;
-  transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out, opacity 0.2s ease;
   user-select: none;
   z-index: 10;
+  position: absolute;
 }
 
 .shape:hover {
@@ -68,6 +69,7 @@
   border-right: 30px solid transparent;
   border-bottom: 60px solid;
   background-color: transparent;
+  position: absolute;
 }
 
 /* Holes */
